@@ -1,0 +1,47 @@
+
+[LeetCode] Partition Equal Subset
+
+Given a non-empty array containing only positive integers , find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
+
+Note:
+Both the array size and each of the array element will not exceed 100.
+
+Example 1:
+
+Input: [1, 5, 11, 5]
+
+Output: true
+
+Explanation: The array can be partitioned as [1, 5, 5] and [11].
+Example 2:
+
+Input: [1, 2, 3, 5]
+
+Output: false
+
+Explanation: The array cannot be partitioned into equal sum subsets.
+
+This question can also be done with bitset, the feeling is also very clever, the size of bisets is set to 5001, 
+why, because the title of the array and the size of each number will not exceed 100, then the biggest The sum is 10000, 
+then half is 5000, plus 0 in front, which is 5001. We initialize the lowest bit to a value of 1, 
+then we calculate the sum of the arrays, and then we traverse the numbers. 
+For the number num traversed, we shift the bits to the left by num, then the original bits, 
+so that all possible Both the position and the position are 1. For example, for the array [2, 3], 
+the initialization bits are 1, then for the number 2, the bits become 101, we can see that the bits[2] are marked as 1, 
+and then traversed to 3. The bits become 101101. We see that bits[5], bits[3], and bits[2] are all 1, which represent the possible 2, 3,
+and 5, so we go through the whole array and go to see Whether bits[sum >> 1] is 1 or not, see the code below:
+
+
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        
+       bitset < 5001 > bits( 1 );
+         int sum = accumulate(nums.begin(), nums.end(), 0 );
+         for ( int num : nums) {
+             bits |= bits << num;
+         }
+        return (sum % 2 == 0 ) && bits[sum >> 1 ];
+    }
+
+};
