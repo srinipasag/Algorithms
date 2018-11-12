@@ -1,0 +1,32 @@
+
+
+Write a bash script to report processes which is greater then 30. 
+
+# echo "PNAME - 31 - Time" | awk '{if($3>30) {print $3}}'
+PNAME - 31 - Time
+
+
+tail -1 file5 |while read line;do
+	linePID=`echo ${line} |awk {'print $1'}`  # Get process ID
+	rmIDVal=`echo ${line} |awk {'print $3'}`  # Get RMID size
+echo "${linePID}"
+done
+
+#!/bin/bash
+IFS=","
+while read user job uid location
+do
+        echo -e "\e[1;33m$user \
+        =======================\e[0m\n\
+        Role : \t $job\n\
+        ID   : \t $uid\n\
+        Site : \t $location\n"
+done < $1
+
+2.
+Removing Duplicate Lines With Sort, Uniq and Shell Pipes
+
+From <https://www.cyberciti.biz/faq/unix-linux-shell-removing-duplicate-lines/> 
+
+sort {file-name} | uniq -u
+sort file.log | uniq -u
