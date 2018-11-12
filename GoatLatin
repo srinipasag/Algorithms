@@ -1,0 +1,23 @@
+
+
+class Solution {
+public:
+    string toGoatLatin(string S) {
+        istringstream iss;
+        iss.str(S);
+        string val, res;
+        //iss >> val;
+        unordered_set<char> vowel({'a','e','i','o','u', 'A','E','I','O','U'});
+        int i = 0, j;
+        while (iss >> val)
+        {
+            res+=' ' + (vowel.count(val[0]) == 1 ? val:val.substr(1)+val[0])+"ma";
+            for (j = 0, ++i; j < i; ++j)
+                res+="a";
+                
+        }
+                //cout << "Value is:" << res << endl;
+
+        return res.substr(1);
+    }
+};
